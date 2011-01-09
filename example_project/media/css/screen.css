@@ -267,8 +267,7 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 /* custom.css */
 body {background:#efefef;padding:2em 0;}
 a:focus, a:hover {color:#F38630;}
-.container {background:#fff;border:1px solid #E0E4CC;}
-#content {padding:3em;}
+.container {background:#fff;border:1px solid #E0E4CC;padding:3em;}
 .back {color:#ccc;display:block;margin-bottom:1em;text-decoration:none;}
 .count {color:#ccc;font-style:italic;margin:-15px 0 10px 10px;}
 .title {font-variant:small-caps;}
@@ -305,7 +304,7 @@ a:focus, a:hover {color:#F38630;}
 #add-item .submit input {margin-left:200px;width:125px;}
 #add-item .meta {color:#666;float:right;font-style:italic;width:200px;}
 #add-item .errorlist {color:#FF1A00;margin-left:200px;padding-left:0;}
-#footer {text-align:center;}
+#footer {text-align:center;padding-top:0;padding-bottom:0;}
 #footer a {color:#999;}
 
 /* semantic class names */
