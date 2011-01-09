@@ -17,4 +17,4 @@ WISHLIST_PUBLIC = getattr(settings, 'WISHLIST_PUBLIC', False)
 
 # A tuple of tags which mark the tagged item as being public.
 # This is only considered if WISHLIST_PUBLIC above is set to False
-WISHLIST_PUBLIC_TAGS = getattr(settings, 'WISHLIST_PUBLIC_TAGS', ('public', 'birthday', 'xmas'))
+WISHLIST_PUBLIC_TAGS = getattr(settings, 'WISHLIST_PUBLIC_TAGS', ('public',))
