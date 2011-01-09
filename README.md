@@ -51,7 +51,7 @@ While on the page of a product that you would like to add, click the bookmarklet
 Installation
 ------------
 
-1.  Put the `wishlist` directory somewhere in your python path (like inside your Django project folder).
+1.  Put the `wishlist` directory somewhere in your Python path (like inside your Django project folder).
 
 2.  Add `wishlist` to your `settings.INSTALLED_APPS`.
 
