@@ -9,7 +9,7 @@
 {% if item_list %}
 <div class="count">{{ item_list.count }} item{{ item_list|pluralize }}</div>
 {% include "wishlist/sort.html" %}
-<ul id="wishlist">
+<ol id="wishlist">
 {% for item in item_list %}
     <li id="item-{{ item.id }}" class="item priority-{{ item.priority }}">
         <h2 class="item-name">{% if item.url %}<a title="View {{ item }}" href="{{ item.url }}">{{ item }}</a>{% else %}{{ item }}{% endif %}</h2>
@@ -49,7 +49,7 @@
         {% endif %}
     </li>
 {% endfor %}
-</ul>
+</ol>
 
 {% include "wishlist/sort.html" %}
 {% else %}
