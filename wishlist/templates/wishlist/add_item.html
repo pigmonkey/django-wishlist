@@ -1,0 +1,30 @@
+{% extends "wishlist/base.html" %}
+{% block title %}Add an Item to {{ wishlist_title }}{% endblock %}
+{% block content %}
+{% include 'wishlist/topnav.html' %}
+
+<h1>Add an Item</h1>
+
+{% if not url %}
+<p>Did you know that you can add items via the <a title="Get the bookmarklet" href="{% url wishlist.views.bookmarklet %}">bookmarklet</a>?</p>
+{% endif %}
+
+{% if form.errors %}
+<p class="error">Please correct the error{{ form.errors|pluralize }} below.</p>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <ul id="add-item">
+        {% for field in form %}
+        <li class="{{ field.html_name }}{% if field.field.required %} required{% endif %}">
+            <label for="id_{{ field.html_name }}">{{ field.label }}{% if field.field.required %} <span class="required"><abbr title="Required">*</span>{% endif %}</label>
+            <div class="field">{% if field.html_name == 'price' %}{{ currency_symbol }} {% endif %}{{ field }}</div>
+            <div class="meta">{{ field.help_text }}</div>
+            {{ field.errors }}
+        </li>
+        {% endfor %}
+        <li class="submit"><input type="submit" value="Add to List" /></li>
+    </ul>
+</form>
+{% endblock %}

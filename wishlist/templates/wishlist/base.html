@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ wishlist_title }}{% endblock %}
+
+{% block content %}
+<h1 class="title"><a title="Permalink to {{ wishlist_title }}" href="{% url wishlist.views.wishlist %}">{{ wishlist_title }}</a></h1>
+
+{% block entry %}{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% if sort_fields %}
+<div class="sort">
+Sort by:
+<ul>
+    {% for field in sort_fields %}
+    {% spaceless %}
+    <li>
+    {% if field == sort_by  %}
+        {% if order == 'desc' %}
+        <a title="Sort by {{ field }}: ascending" href="{% url wishlist.views.wishlist field 'asc' %}">{{ field|capfirst }} &uarr;</a>
+        {% else %}
+        <a title="Sort by {{ field }}: descending" href="{% url wishlist.views.wishlist field 'desc' %}">{{ field|capfirst }} &darr;</a>
+        {% endif %}
+    {% else %}
+        <a title="Sort by {{ field }}: descending" href="{% url wishlist.views.wishlist field 'desc' %}">{{ field|capfirst }} &darr;</a>
+    {% endif %}
+    </li>
+    {% endspaceless %}
+    {% endfor %}
+</ul>
+</div>
+{% endif %}

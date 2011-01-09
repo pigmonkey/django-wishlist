@@ -1,0 +1,14 @@
+{% extends "wishlist/base.html" %}
+{% block title %}Delete {{ item }}{% endblock %}
+{% block content %}
+{% include 'wishlist/topnav.html' %}
+
+<h1>Are you sure you want to delete <em>{{ item }}</em>?</h1>
+
+<form id="delete-item" action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Yes, I'm Sure" />
+</form>
+
+{% endblock %}

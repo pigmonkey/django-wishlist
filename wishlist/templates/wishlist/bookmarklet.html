@@ -1,0 +1,17 @@
+{% extends "wishlist/base.html" %}
+{% block title %}Bookmarklet{% endblock %}
+{% block content %}
+{% include 'wishlist/topnav.html' %}
+
+<h1>Bookmarklet</h1>
+
+<p>Add the below link to your browser's bookmark toolbar.</p>
+
+<p>When you're on the page of an item that you'd like to add to your wishlist, click the bookmarklet in your toolbar. You will then be taken to a form to save the item. The form will attempt to scrape the item name and price from the item page. After you've saved the item, you'll be directed back to the item's page so that you can continue your browsing!</p>
+
+<a id="bookmarklet" title="Add to Wishlist ({{ wishlist_title }})" href="javascript:(function(){if(window.getSelection){t=window.getSelection();}else%20if(document.getSelection){t=document.getSelection();}else%20if(document.selection){t=document.selection.createRange().text;};location.href='{{ add_url }}?url='+encodeURIComponent(location.href);})();">Add to Wishlist ({{ wishlist_title }})</a>
+
+<pre>
+</pre>
+
+{% endblock %}

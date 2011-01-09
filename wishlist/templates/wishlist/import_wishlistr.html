@@ -1,0 +1,24 @@
+{% extends "wishlist/base.html" %}
+{% block title %}Wishlistr Import (Unstable){% endblock %}
+
+{% block content %}
+{% if result %}
+<h1>{{ result }}</h1>
+{% endif %}
+
+{% if items %}
+<ul>
+{% for item in items %}
+    <li>
+        <ul>
+            <li>{{ item.name }}</li>
+            <li>{{ item.url }}</li>
+            <li>{{ item.price }}</li>
+        </ul>
+    </li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No items!</p>
+{% endif %}
+{% endblock %}

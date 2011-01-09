@@ -1,0 +1,58 @@
+{% extends "wishlist/base.html" %}
+{% block title %}{{ wishlist_title }}{% if sort_by %} | {{ sort_by|capfirst }}: {{ order }}{% endif %}{% endblock %}
+
+{% block entry %}
+{% if perms.wishlist.add_item %}
+<a title="Add an item to {{ wishlist_title }}" class="add" href="{% url wishlist.views.add_item %}">Add an Item</a>
+{% endif %}
+
+{% if item_list %}
+<div class="count">{{ item_list.count }} item{{ item_list|pluralize }}</div>
+{% include "wishlist/sort.html" %}
+<ul id="wishlist">
+{% for item in item_list %}
+    <li id="item-{{ item.id }}" class="item priority-{{ item.priority }}">
+        <h2 class="item-name">{% if item.url %}<a title="View {{ item }}" href="{{ item.url }}">{{ item }}</a>{% else %}{{ item }}{% endif %}</h2>
+
+        {% if perms.wishlist %}
+        <ul class="admin-links">
+            {% if perms.wishlist.change_item %}
+            <a title="Edit {{ item }}" class="edit" href="{% url admin:wishlist_item_change item.id %}">Edit</a>
+            {% endif %}
+            {% if perms.wishlist.delete_item %}
+            <a title="Delete {{ item }}" class="delete" href="{% url wishlist.views.delete_item item.id %}">Delete</a>
+            {% endif %}
+        </ul>
+        {% endif %}
+
+        <div class="price"><abbr title="{{ currency }}">{{ currency_symbol }}</abbr>{{ item.price }}</div>
+        
+        {% if item.notes %}
+        <div class="notes">
+        {{ item.notes|safe|linebreaks }}
+        </div>
+        {% endif %}
+
+        <dl class="meta">
+            <dt class="date">Added</dt>
+                <dd class="date">{{ item.date }}</dd>
+            <dt class="priority">Priority</dt>
+                <dd class="priority">{{ item.get_priority_display }}</dd>
+        </dl>
+        
+        {% if item.get_tags %}
+        <ul class="tags">
+            {% for tag in item.get_tags %}
+            <li><a title="View all items tagged with {{ tag }}" href="{% url items_by_tag tag %}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+
+{% include "wishlist/sort.html" %}
+{% else %}
+<p>No items available.</p>
+{% endif %}
+{% endblock %}
