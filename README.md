@@ -99,3 +99,13 @@ A tuple of tags which mark the tagged item as being public.
 This setting is only considered if `WISHLIST_PUBLIC` is set to False.
 
 Default: ('public',)
+
+
+Feedback
+--------
+
+If you use Wishlist, I'd be interested to hear any feedback you might have. [Contact me via email](mailto:pm@pig-monkey.com).
+
+From the user perspective, I'm keen to hear whether the app fills your needs or not.
+
+I am new to both Django and Python, so, from the developer perspective, I would appreciate any feedback on the code.
