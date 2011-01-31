@@ -22,7 +22,7 @@ class Item(models.Model):
             symbol.' % (settings.WISHLIST_CURRENCY[0]))
     priority = models.PositiveIntegerField(choices=PRIORITIES, default=4,
         help_text='The priority of the item.')
-    url = models.URLField(blank=True, verbose_name='URL',
+    url = models.URLField(max_length=400, blank=True, verbose_name='URL',
         help_text='An option URL for the item.')
     notes = models.TextField(blank=True,
         help_text='Any optional notes on the item (size, color, etc.).')
