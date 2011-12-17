@@ -61,7 +61,7 @@ Installation
 Requirements
 ------------
 
-* [django-tagging](https://code.google.com/p/django-tagging/) is used for tagging.
+* [django-taggit](http://django-taggit.readthedocs.org) is used for tagging.
 * [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/) is used for page parsing.
 
 

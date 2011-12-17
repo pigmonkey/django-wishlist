@@ -1,7 +1,7 @@
 from django.db import models
-from tagging.fields import TagField
-from tagging.models import Tag
+from taggit.managers import TaggableManager
 from wishlist import settings
+
 
 class Item(models.Model):
     """
@@ -26,7 +26,7 @@ class Item(models.Model):
         help_text='An option URL for the item.')
     notes = models.TextField(blank=True,
         help_text='Any optional notes on the item (size, color, etc.).')
-    tags = TagField()
+    tags = TaggableManager(blank=True)
     date = models.DateField(auto_now_add=True)
 
     def __unicode__(self):
@@ -34,7 +34,3 @@ class Item(models.Model):
     
     class Meta:
         ordering = ('-date',)
-
-    @property
-    def get_tags(self):
-        return Tag.objects.get_for_object(self)

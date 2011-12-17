@@ -7,7 +7,7 @@
 {% endif %}
 
 {% if item_list %}
-<div class="count">{{ item_list.count }} item{{ item_list|pluralize }}</div>
+<div class="count">{{ item_list|length }} item{{ item_list|pluralize }}</div>
 {% include "wishlist/sort.html" %}
 <ol id="wishlist">
 {% for item in item_list %}
@@ -40,9 +40,9 @@
                 <dd class="priority">{{ item.get_priority_display }}</dd>
         </dl>
         
-        {% if item.get_tags %}
+        {% if item.tags.all %}
         <ul class="tags">
-            {% for tag in item.get_tags %}
+            {% for tag in item.tags.all %}
             <li><a title="View all items tagged with {{ tag }}" href="{% url items_by_tag tag %}">{{ tag }}</a></li>
             {% endfor %}
         </ul>

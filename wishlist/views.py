@@ -3,7 +3,6 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.template import RequestContext
-from tagging.models import Tag
 from wishlist.models import Item
 from wishlist.forms import AddItem, DeleteItem
 from wishlist import scrape
@@ -20,7 +19,7 @@ def querysort(sort, sort_by):
     else:
         raise Http404
 
-def wishlist(request, sort='desc', sort_by=None):
+def wishlist(request, sort='desc', sort_by=None, querytag=None):
     """
     Display the wishlist, taking public options and sorting into account.
     """
@@ -34,24 +33,32 @@ def wishlist(request, sort='desc', sort_by=None):
     else:
         queryset = Item.objects.all()
 
+    # If a query tag was provided, create a list of all items tagged with that
+    # tag.
+    if querytag:
+        tagged_items = []
+        for item in queryset:
+            for tag in item.tags.all():
+                if tag.name == querytag:
+                    tagged_items.append(item)
+                    break
+        # Overwrite the queryset with the list of matching items.
+        queryset = tagged_items
+            
+
     # If the wishlist is not public and the user does not have permission to
     # change items, set queryset to only include items with public tags.
     if request.user.has_perm('wishlist.change_item') is False and settings.WISHLIST_PUBLIC is False:
-        
         # Get all public tags.
-        public_tags = []
-        for tag_name in settings.WISHLIST_PUBLIC_TAGS:
-            try:
-                public_tags.append(Tag.objects.get(name=tag_name))
-            except Tag.DoesNotExist:
-                pass
+        public_tags = settings.WISHLIST_PUBLIC_TAGS
 
         # If the item is tagged with a public tag, add it to the public list.
         public_items = []
         for item in queryset:
-            for tag in public_tags:
-                if tag in item.get_tags:
+            for tag in item.tags.all():
+                if tag.name in public_tags:
                     public_items.append(item)
+                    break
 
         # Overwrite the original queryset with the list of public items.
         queryset = public_items
